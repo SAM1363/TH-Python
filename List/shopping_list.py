@@ -1,5 +1,6 @@
 shopping_list = []
 
+
 def show_help():
     print("""
     Enter 'help' for help
@@ -21,7 +22,6 @@ def show_list():
 
 def remove_from_list():
     
-
 show_help()
 
 while True:
