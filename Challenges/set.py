@@ -14,12 +14,26 @@ COURSES = {
                     "functions", "input"}
 }
 
-for each in COURSES.values():
-    # print(each)
-    for e in each:
-        print(e)
+# for each, value in COURSES.items():
+#         print(each)
+#         print(value)
+#         print('-' * 20)
+
 
 # def covers(dic):
 #     course_name = []
-#     for each in dic:
+#     for key, value in COURSES.items():
+#         if value & dic:
+#             course_name.append(key)
+#     return course_name
+
+
+def covers_all(dic):
+    courses = []
+    for key, value in COURSES.items():
+        if dic.issubset(value):
+            courses.append(key)
+    return courses
+
+print(covers_all({"conditions", "input"}))
     
