@@ -1,6 +1,8 @@
 import json
 from copy import copy
 from operator import itemgetter, attrgetter
+from functools import reduce, partial
+
 
 
 class Book:
@@ -44,15 +46,15 @@ def sales_price(book):
 # print(BOOKS[0].price)
 # print(saled_book[0].price)
 
-# def is_long_book(book):
-#     '''Does a book have 600+ pages?'''
-#     return book.number_of_pages >= 600
+def is_long_book(book):
+    '''Does a book have 600+ pages?'''
+    return book.number_of_pages >= 600
 
 # long_books = list(filter(is_long_book, BOOKS))
 # long_books2 = [each for each in BOOKS if is_long_book(each)]
 
-def is_long_book(book):
-    return any(['Roland' in subject for subject in book.subjets])
+# def is_long_book(book):
+#     return any(['Roland' in subject for subject in book.subjets])
 
 def titlecase(book):
     book = copy(book)
@@ -64,4 +66,30 @@ def is_good_deal(book):
 
 cheap_books = sorted(filter(is_good_deal, map(sales_price, BOOKS)), key=attrgetter('price'))
 
-print(cheap_books[3].price)
+# print(cheap_books[3].price)
+
+
+
+# LAMBDA
+
+total = reduce(lambda x, y: x + y, [each.price for each in BOOKS])
+# print(total)
+long_books = list(filter(lambda x: x.number_of_pages >=600, BOOKS))
+# print(len(long_books))
+good_deal = list(filter(lambda x: x.price <= 6, BOOKS))
+# print(len(good_deal))
+
+
+# PARTIALS
+
+def markdown(book, discount):
+    book = copy(book)
+    book.price = round(book.price - book.price * discount, 2)
+    return book
+
+half = partial(markdown, discount=.5)
+long_be_half = map(half, filter(is_long_book, BOOKS))
+
+print(half(BOOKS[0]).price)
+
+print(list(long_be_half))
