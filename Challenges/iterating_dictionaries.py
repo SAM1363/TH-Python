@@ -25,3 +25,4 @@ for index, each in enumerate(some_kinf_of_sequence, 1): # same result but sort w
 
 
 student_gpas = [4.0, 2.3, 3.5, 3.7, 3.9, 2.8, 1.5, 4.0]
+slied_gpas = student_gpas[2:6]
